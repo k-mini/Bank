@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             ObjectMapper om = new ObjectMapper();
             LoginReqDto loginReqDto = om.readValue(request.getInputStream(), LoginReqDto.class);
 
-            // 강제 로그인
+            // 강제 로그인 => 인증 관련 토큰 (JWT 토큰과 무관함)
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                     loginReqDto.getUsername(), loginReqDto.getPassword());
 
