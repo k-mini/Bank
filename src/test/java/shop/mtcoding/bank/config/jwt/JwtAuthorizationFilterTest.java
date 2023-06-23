@@ -66,6 +66,6 @@ public class JwtAuthorizationFilterTest {
                         .header(JwtVO.HEADER, jwtToken));
 
         // then
-        resultActions.andExpect(status().isForbidden());
+        resultActions.andExpect(status().isForbidden()); // 403
     }
 }
