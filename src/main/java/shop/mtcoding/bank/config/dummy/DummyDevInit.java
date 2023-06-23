@@ -16,6 +16,7 @@ public class DummyDevInit extends DummyObject {
     CommandLineRunner init(UserRepository userRepository) {
         return (args) -> {
             // 서버 실행시에 무조건 실행된다.
+            System.out.println("테스트 : DummyDevInit파일 CommandLineRunner 실행 =====================");
             User user = userRepository.save(newUser("ssar", "쌀"));
         };
     }

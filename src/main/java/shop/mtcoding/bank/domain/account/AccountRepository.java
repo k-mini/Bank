@@ -3,6 +3,9 @@ package shop.mtcoding.bank.domain.account;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 import shop.mtcoding.bank.domain.user.User;
 
@@ -10,8 +13,13 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     // jpa query method
     // select * from account where number = :number
-    // checkpoint : 리팩토링 해야함!! (계좌 소유자 확인시에 쿼리가 두번 나가기 때문에 join fetch)
-    Optional<Account> findByNumber(Long number);
+    // 신경안써도됨 : 리팩토링 해야함!! (계좌 소유자 확인시에 쿼리가 두번 나가기 때문에 join fetch)
+    // 그러나 account.getUser().getId()은 Lazy 로딩이 발생하지 않기 때문에 따로 join fetch 해주지 않아도 됨.
+
+    // join fetch를 하면 조인해서 객체에 값을 미리 가져올 수 있다.
+    // @Query("SELECT ac FROM Account ac JOIN FETCH ac.user u WHERE ac.number =
+    // :number") // JPQL 문법
+    Optional<Account> findByNumber(@Param("number") Long number);
 
     // jpa query method
     // select * from account where user_id = :id

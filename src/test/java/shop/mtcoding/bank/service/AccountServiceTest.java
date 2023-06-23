@@ -1,6 +1,8 @@
 package shop.mtcoding.bank.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -24,6 +26,7 @@ import shop.mtcoding.bank.domain.user.User;
 import shop.mtcoding.bank.domain.user.UserRepository;
 import shop.mtcoding.bank.dto.account.AccountReqDto.AccountSaveReqDto;
 import shop.mtcoding.bank.dto.account.AccountRespDto.AccountSaveRespDto;
+import shop.mtcoding.bank.handler.ex.CustomApiException;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceTest extends DummyObject {
@@ -53,7 +56,7 @@ public class AccountServiceTest extends DummyObject {
         when(userRepository.findById(any())).thenReturn(Optional.of(ssar));
 
         // stub 2
-        when(accountRepository.findByNumber(1L)).thenReturn(Optional.empty());
+        when(accountRepository.findByNumber(any())).thenReturn(Optional.empty());
 
         // stub 3
         Account ssarAccount = newMockAccount(1L, 1111L, 1000L, ssar);
@@ -67,5 +70,24 @@ public class AccountServiceTest extends DummyObject {
         // then
         assertThat(accountSaveRespDto.getNumber()).isEqualTo(1111L);
         assertThat(accountSaveRespDto.getBalance()).isEqualTo(1000L);
+    }
+
+    @Test
+    public void 계좌삭제_test() throws Exception {
+        // given
+        Long number = 1111L;
+        Long userId = 2L;
+
+        // stub
+        User ssar = newMockUser(1L, "ssar", "쌀");
+        Account ssarAccount = newMockAccount(1L, 1111L, 1000L, ssar);
+        when(accountRepository.findByNumber(any())).thenReturn(Optional.of(ssarAccount));
+
+        // when
+        assertThrows(CustomApiException.class, () -> {
+            accountService.계좌삭제(number, userId);
+        });
+
+        // then
     }
 }

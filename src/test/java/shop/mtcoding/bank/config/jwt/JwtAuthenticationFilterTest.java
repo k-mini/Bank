@@ -14,6 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,9 @@ import shop.mtcoding.bank.config.dummy.DummyObject;
 import shop.mtcoding.bank.domain.user.UserRepository;
 import shop.mtcoding.bank.dto.user.UserReqDto.LoginReqDto;
 
-@Transactional
+// SpringBootTest 하는 곳에는 전부다 treadown.sql을 붙여주자.
+@Sql("classpath:db/teardown.sql") // 실행시점 : BeforeEach 실행 직전마다!!
+// @Transactional
 @ActiveProfiles("test")
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
@@ -41,6 +44,7 @@ public class JwtAuthenticationFilterTest extends DummyObject {
 
     @BeforeEach
     public void setUp() throws Exception {
+        System.out.println("JwtAuthenticationFilterTest setUp ==================================== : ");
         userRepository.save(newUser("ssar", "쌀"));
     }
 
