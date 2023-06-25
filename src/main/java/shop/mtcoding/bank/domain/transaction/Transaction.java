@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import lombok.Builder;
@@ -59,7 +60,7 @@ public class Transaction {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @LastModifiedBy // Insert, Update
+    @LastModifiedDate // Insert, Update
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 

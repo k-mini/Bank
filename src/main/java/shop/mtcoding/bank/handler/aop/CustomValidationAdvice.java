@@ -38,6 +38,7 @@ public class CustomValidationAdvice {
                     Map<String, String> errorMap = new HashMap<>();
 
                     for (FieldError error : bindingResult.getFieldErrors()) {
+                        System.out.println("테스트 에러값 : " + error.getDefaultMessage());
                         errorMap.put(error.getField(), error.getDefaultMessage());
                     }
                     throw new CustomValidationException("유효성검사 실패", errorMap);

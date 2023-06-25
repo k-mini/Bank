@@ -1,5 +1,8 @@
 package shop.mtcoding.bank.temp;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.regex.Pattern;
 
 import org.junit.jupiter.api.Test;
@@ -75,4 +78,35 @@ public class RegexTest {
         System.out.println("테스트 : " + result);
     }
 
+    @Test
+    public void account_gubun_test1() throws Exception {
+        String gubun = "DEPOSIT";
+        boolean result = Pattern.matches("^(DEPOSIT)$", gubun);
+        // boolean result = Pattern.matches("^\\w+@\\w+\\.\\w+$", email);
+        System.out.println("테스트 : " + result);
+    }
+
+    @Test
+    public void account_gubun_test2() throws Exception {
+        String gubun = "TRNASFER";
+        boolean result = Pattern.matches("^(DEPOSIT|TRNASFER)$", gubun);
+        // boolean result = Pattern.matches("^\\w+@\\w+\\.\\w+$", email);
+        System.out.println("테스트 : " + result);
+    }
+
+    @Test
+    public void account_tel_tes1() throws Exception {
+        String tel = "010-2222-3333";
+        boolean result = Pattern.matches("^[0-9]{3}-[0-9]{4}-[0-9]{4}$", tel);
+        // boolean result = Pattern.matches("^\\w+@\\w+\\.\\w+$", email);
+        System.out.println("테스트 : " + result);
+    }
+
+    @Test
+    public void account_tel_test2() throws Exception {
+        String tel = "01022223333";
+        boolean result = Pattern.matches("^[0-9]{11}", tel);
+        // boolean result = Pattern.matches("^\\w+@\\w+\\.\\w+$", email);
+        System.out.println("테스트 : " + result);
+    }
 }

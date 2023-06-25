@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -33,5 +34,10 @@ public class CustomExceptionHandler {
     public ResponseEntity<?> validatioApiException(CustomValidationException e) {
         log.error(e.getMessage());
         return new ResponseEntity<>(new ResponseDto<>(-1, e.getMessage(), e.getErrorMap()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> normalApiException(HttpMessageNotReadableException e) {
+        return new ResponseEntity<>(new ResponseDto<>(-1, "잘못된 요청입니다.", null), HttpStatus.BAD_REQUEST);
     }
 }

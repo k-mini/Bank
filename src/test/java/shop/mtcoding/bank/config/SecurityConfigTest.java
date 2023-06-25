@@ -12,8 +12,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.transaction.annotation.Transactional;
 
 @Sql("classpath:db/teardown.sql")
+// @Transactional
 @ActiveProfiles("test")
 @AutoConfigureMockMvc // Mock(가짜) 환경에 MockMvc가 등록됨
 @SpringBootTest(webEnvironment = WebEnvironment.MOCK)
