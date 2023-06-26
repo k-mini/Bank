@@ -22,8 +22,10 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import shop.mtcoding.bank.domain.account.Account;
 
+@ToString
 @NoArgsConstructor
 @Getter
 @EntityListeners(AuditingEntityListener.class)

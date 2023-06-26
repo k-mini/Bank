@@ -19,7 +19,7 @@ public class AccountRespDto {
     @Getter
     public static class AccountTransferRespDto {
         private Long id; // 계좌 ID
-        private Long number; // 계좌번호
+        private Long number; // 출금 계좌번호
         private Long balance; // 출금 계좌 잔액
         private TransactionDto transaction; // 거래내역
 
@@ -49,6 +49,7 @@ public class AccountRespDto {
                 this.receiver = transaction.getReceiver();
                 this.amount = transaction.getAmount();
                 this.createdAt = CustomDateUtil.toStringFormat(transaction.getCreatedAt());
+                this.depositAccountBalance = transaction.getDepositAccountBalance();
             }
         }
     }
