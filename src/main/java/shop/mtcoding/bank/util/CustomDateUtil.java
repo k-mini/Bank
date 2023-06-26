@@ -9,4 +9,8 @@ public class CustomDateUtil {
         // System.out.println(localDateTime);
         return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
+
+    private CustomDateUtil() {
+
+    }
 }
