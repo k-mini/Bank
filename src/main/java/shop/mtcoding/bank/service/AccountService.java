@@ -72,7 +72,7 @@ public class AccountService {
 
         // 2. 계좌 소유자 확인
         accountPS.checkOwner(userId);
-
+        System.out.println("테스트 : accountPS.getId() " + accountPS.getId());
         // 3. 계좌 삭제
         accountRepository.deleteById(accountPS.getId());
     }

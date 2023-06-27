@@ -51,7 +51,7 @@ public class AccountController {
 
     // 인증이 필요하고, account 테이블에 login한 유저의 계좌만 주세요.
     @GetMapping("/s/account/login-user")
-    public ResponseEntity<?> findUserAccount(@PathVariable Long id, @AuthenticationPrincipal LoginUser loginUser) {
+    public ResponseEntity<?> findUserAccount(@AuthenticationPrincipal LoginUser loginUser) {
 
         AccountLIstRespDto accountLIstRespDto = accountService.계좌목록보기_유저별(loginUser.getUser().getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "계좌목록보기 유저별 성공", accountLIstRespDto), HttpStatus.OK);
@@ -59,6 +59,7 @@ public class AccountController {
 
     @DeleteMapping("/s/account/{number}")
     public ResponseEntity<?> deleteAccount(@PathVariable Long number, @AuthenticationPrincipal LoginUser loginUser) {
+        System.out.println("테스트 : 계좌삭제 시작======================");
         accountService.계좌삭제(number, loginUser.getUser().getId());
         return new ResponseEntity<>(new ResponseDto<>(1, "계좌 삭제 완료", null), HttpStatus.OK);
     }

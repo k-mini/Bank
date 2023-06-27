@@ -1,6 +1,7 @@
 package shop.mtcoding.bank.domain.user;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -20,6 +22,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import shop.mtcoding.bank.domain.account.Account;
 
 @ToString
 @NoArgsConstructor // 스프링이 User 객체생성할 때 빈 생성자로 new를 하기 때문!!
@@ -48,6 +51,9 @@ public class User { // extends 시간설정 (상속)
     @Enumerated(EnumType.STRING) // Enum타입을 String으로 명시
     @Column(nullable = false)
     private UserEnum role; // ADMIN, CUSTOMER
+
+    // @OneToMany(mappedBy = "user")
+    // private List<Account> accounts;
 
     @CreatedDate // Insert 할때 날짜 자동
     @Column(nullable = false)
